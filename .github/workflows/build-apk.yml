@@ -41,5 +41,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Qarari-V4.1-APK
-          path: Qarari-V4.1.apk
+          name: Qarari-V5.0-APK
+          path: Qarari-V5.0.apk
