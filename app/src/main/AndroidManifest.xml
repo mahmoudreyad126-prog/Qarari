@@ -6,16 +6,30 @@
         android:icon="@drawable/ic_launcher"
         android:supportsRtl="true">
 
+        <activity android:name=".ui.SettingsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.HistoryActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.ScenarioActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.CompareActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.VaultActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.OfferActivity" android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.qarari.app.files"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 </manifest>

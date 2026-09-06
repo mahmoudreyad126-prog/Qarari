@@ -10,7 +10,23 @@ android {
         applicationId "com.qarari.app"
         minSdk 23
         targetSdk 35
-        versionCode 50
-        versionName "5.0"
+        versionCode 100
+        versionName "Final"
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+
+dependencies {
+    implementation 'androidx.core:core:1.15.0'
 }
