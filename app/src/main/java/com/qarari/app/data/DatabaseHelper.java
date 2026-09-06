@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB = "qarari.db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     public DatabaseHelper(Context context) { super(context, DB, null, VERSION); }
 
@@ -31,9 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS history");
-        db.execSQL("DROP TABLE IF EXISTS offers");
-        onCreate(db);
+        if (oldVersion < 2) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, createdAt INTEGER, summary TEXT)");
+        }
     }
 
     public long saveOffer(Offer o) {

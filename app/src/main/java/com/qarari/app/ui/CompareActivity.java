@@ -44,8 +44,8 @@ public class CompareActivity extends Activity {
         StringBuilder hist=new StringBuilder("الفائز: ").append(winner.o.company).append(" (Score ").append(winner.a.qarariScore).append(") | مقارنة مع: ");
         for(Row x:rows)hist.append(x.o.company).append(" "); db.addHistory(hist.toString());
 
-        LinearLayout r=Ui.root(this); r.setLayoutDirection(LinearLayout.LAYOUT_DIRECTION_RTL); r.addView(Ui.title(this,"نتيجة المقارنة"));
-        r.addView(Ui.text(this,"🏆 الأفضل: "+winner.o.company+"\n"+DecisionEngine.recommendation(winner.a),20));
+        LinearLayout r=Ui.root(this); r.setLayoutDirection(LinearLayout.LAYOUT_DIRECTION_RTL); r.addView(Ui.eyebrow(this,"القرار بالأرقام")); r.addView(Ui.title(this,"نتيجة المقارنة"));
+        LinearLayout winnerCard=Ui.card(this); winnerCard.addView(Ui.eyebrow(this,"التوصية الحالية")); winnerCard.addView(Ui.text(this,winner.o.company+"  •  "+winner.o.role,20)); winnerCard.addView(Ui.score(this,winner.a.qarariScore)); winnerCard.addView(Ui.text(this,DecisionEngine.recommendation(winner.a),15)); r.addView(winnerCard);
         for(Row x:rows){
             StringBuilder s=new StringBuilder();
             s.append(x.o.company).append(" — ").append(x.o.role).append("\n")
@@ -55,7 +55,7 @@ public class CompareActivity extends Activity {
              .append("Financial ").append(x.a.financialScore).append(" | Career ").append(x.a.careerScore)
              .append(" | Work-Life ").append(x.a.workLifeScore).append(" | Benefits ").append(x.a.benefitsScore).append("\n")
              .append("المخاطر: ").append(x.a.risks.size());
-            r.addView(Ui.section(this,s.toString()));
+            LinearLayout resultCard=Ui.card(this); resultCard.addView(Ui.text(this,s.toString(),15)); r.addView(resultCard);
             for(RiskFlag f:x.a.risks) r.addView(Ui.text(this,"• "+f.severity+" — "+f.title+": "+f.detail,14));
         }
         r.addView(Ui.section(this,"Negotiation Assistant"));
