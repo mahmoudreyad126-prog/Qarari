@@ -7,640 +7,778 @@
 
 <style>
 :root{
---bg:#f5f7fb;--card:#fff;--txt:#0f172a;
---muted:#64748b;--line:#e2e8f0;
---accent:#111827;--soft:#eef2ff
+ --bg:#f4f6fa;--card:#fff;--txt:#101828;--muted:#667085;
+ --line:#e4e7ec;--primary:#101828;--primaryText:#fff;
+ --soft:#f2f4f7;--green:#12b76a;--red:#f04438;
+ --orange:#f79009;--blue:#2e90fa;--shadow:0 8px 30px rgba(16,24,40,.07);
 }
 [data-theme="dark"]{
---bg:#0b1220;--card:#111827;--txt:#f8fafc;
---muted:#94a3b8;--line:#243044;
---accent:#f8fafc;--soft:#1e293b
+ --bg:#090e18;--card:#111827;--txt:#f9fafb;--muted:#98a2b3;
+ --line:#273244;--primary:#f9fafb;--primaryText:#101828;
+ --soft:#1d2939;--shadow:0 8px 30px rgba(0,0,0,.18);
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial;
-background:var(--bg);color:var(--txt)
+ margin:0;background:var(--bg);color:var(--txt);
+ font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial;
+ padding-bottom:90px
 }
-.wrap{max-width:980px;margin:auto;padding:16px}
-.hero{padding:8px 0 14px}
-.hero h1{margin:3px 0;font-size:30px}
-.hero p{color:var(--muted);line-height:1.6}
-.badge{
-display:inline-block;background:var(--soft);
-padding:5px 9px;border-radius:999px;
-font-size:12px;font-weight:700
-}
-.toolbar{display:flex;gap:8px;margin-bottom:12px}
-.toolbar button,.tabs button{
-border:1px solid var(--line);background:var(--card);
-color:var(--txt);border-radius:12px;padding:10px 12px
-}
-.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:12px}
-.tabs button.active{background:var(--accent);color:var(--bg)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.container{max-width:900px;margin:auto;padding:18px}
 .card{
-background:var(--card);border:1px solid var(--line);
-border-radius:18px;padding:15px;margin-bottom:12px;
-box-shadow:0 8px 24px rgba(0,0,0,.04)
+ background:var(--card);border:1px solid var(--line);
+ border-radius:22px;padding:17px;margin-bottom:14px;
+ box-shadow:var(--shadow)
 }
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-h2{font-size:18px;margin:0 0 10px}
-h3{font-size:15px;margin:14px 0 4px}
-label{
-display:block;color:var(--muted);
-font-size:13px;margin:9px 0 4px
-}
+.small{font-size:12px;color:var(--muted);line-height:1.7}
+.muted{color:var(--muted)}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:28px;margin-bottom:6px}
+h2{font-size:18px;margin-bottom:12px}
+h3{font-size:15px}
 input,select{
-width:100%;padding:11px;border-radius:11px;
-border:1px solid var(--line);
-background:var(--card);color:var(--txt);font-size:15px
+ width:100%;padding:13px 14px;border:1px solid var(--line);
+ background:var(--card);color:var(--txt);border-radius:14px;
+ outline:none;margin-top:5px
 }
-.check{display:flex;gap:8px;align-items:center}
-.check input{width:auto}
+input:focus,select:focus{border-color:var(--blue)}
+label{font-size:13px;color:var(--muted);display:block;margin:11px 0 3px}
 .primary{
-width:100%;border:0;background:var(--accent);
-color:var(--bg);padding:14px;border-radius:14px;
-font-size:16px;font-weight:800
+ width:100%;padding:14px;border:0;border-radius:15px;
+ background:var(--primary);color:var(--primaryText);font-weight:800
+}
+.secondary{
+ width:100%;padding:13px;border:1px solid var(--line);
+ background:var(--card);color:var(--txt);border-radius:15px;font-weight:700
+}
+.danger{color:var(--red)}
+.row{display:flex;gap:10px;align-items:center}
+.row>*{flex:1}
+.topbar{
+ display:flex;justify-content:space-between;align-items:center;
+ margin-bottom:18px
+}
+.logo{
+ width:44px;height:44px;border-radius:15px;background:var(--primary);
+ color:var(--primaryText);display:flex;align-items:center;
+ justify-content:center;font-size:22px;font-weight:900
+}
+.avatar{
+ width:42px;height:42px;border-radius:50%;background:var(--soft);
+ display:flex;align-items:center;justify-content:center;font-weight:900
+}
+.hero{
+ background:linear-gradient(135deg,#101828,#344054);
+ color:white;border-radius:25px;padding:22px;margin-bottom:15px;
+ box-shadow:0 14px 35px rgba(16,24,40,.2)
+}
+.hero p{color:#d0d5dd;line-height:1.7}
+.hero button{
+ background:white;color:#101828;border:0;border-radius:14px;
+ padding:12px 16px;font-weight:900
+}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{
+ background:var(--card);border:1px solid var(--line);
+ border-radius:18px;padding:14px;text-align:center
+}
+.stat b{font-size:20px;display:block;margin-bottom:4px}
+.stat span{font-size:11px;color:var(--muted)}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quickCard{
+ border:1px solid var(--line);background:var(--card);color:var(--txt);
+ border-radius:18px;padding:17px;text-align:right
+}
+.quickIcon{
+ width:39px;height:39px;background:var(--soft);border-radius:12px;
+ display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:12px
+}
+.quickCard b{display:block;margin-bottom:4px}
+.sectionTitle{
+ display:flex;justify-content:space-between;align-items:center;margin:20px 2px 10px
+}
+.sectionTitle h2{margin:0}
+.linkbtn{border:0;background:none;color:var(--blue);font-weight:700}
+.nav{
+ position:fixed;bottom:0;left:0;right:0;background:var(--card);
+ border-top:1px solid var(--line);z-index:50;
+ padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+ display:flex;justify-content:space-around
+}
+.nav button{
+ background:none;border:0;color:var(--muted);
+ padding:6px 8px;font-size:11px;min-width:58px
+}
+.nav button span{display:block;font-size:21px;margin-bottom:2px}
+.nav button.active{color:var(--txt);font-weight:900}
+.offer{
+ display:flex;justify-content:space-between;gap:12px;
+ padding:13px 0;border-bottom:1px solid var(--line)
+}
+.offer:last-child{border-bottom:0}
+.offer b{display:block}
+.tag{
+ display:inline-block;padding:5px 9px;border-radius:999px;
+ background:var(--soft);font-size:11px;font-weight:700
+}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.orange{color:var(--orange)}
+.scoreCircle{
+ width:78px;height:78px;border-radius:50%;border:8px solid var(--green);
+ display:flex;align-items:center;justify-content:center;
+ font-size:20px;font-weight:900;margin:auto
 }
 .metric{
-display:flex;justify-content:space-between;
-gap:10px;padding:9px 0;
-border-bottom:1px dashed var(--line)
+ display:flex;justify-content:space-between;padding:10px 0;
+ border-bottom:1px dashed var(--line);gap:10px
 }
 .metric:last-child{border-bottom:0}
-.score{font-size:34px;font-weight:900}
-.winner{font-size:21px;font-weight:900}
-.hint{font-size:12px;color:var(--muted);line-height:1.6}
-.ai{
-line-height:1.8;background:var(--soft);
-padding:12px;border-radius:14px
+.alert{
+ padding:12px;border-radius:14px;background:var(--soft);
+ margin:8px 0;line-height:1.7;font-size:13px
 }
-.hidden{display:none}
-
-@media(max-width:720px){
-.grid{grid-template-columns:1fr}
-.hero h1{font-size:26px}
+.check{display:flex;align-items:center;gap:9px;color:var(--txt)}
+.check input{width:auto;margin:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.login{
+ min-height:90vh;display:flex;align-items:center;justify-content:center
+}
+.loginBox{width:100%;max-width:430px}
+.brandBig{text-align:center;margin-bottom:25px}
+.brandBig .logo{margin:auto;width:66px;height:66px;border-radius:21px;font-size:31px}
+.brandBig h1{margin:13px 0 4px}
+.setting{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:14px 0;border-bottom:1px solid var(--line)
+}
+.setting:last-child{border-bottom:0}
+.switch{
+ width:48px;height:28px;background:#d0d5dd;border-radius:99px;
+ position:relative;flex:none
+}
+.switch:after{
+ content:"";position:absolute;width:22px;height:22px;background:white;
+ border-radius:50%;top:3px;right:3px;transition:.2s
+}
+.switch.on{background:var(--green)}
+.switch.on:after{right:23px}
+.back{
+ border:0;background:var(--soft);color:var(--txt);
+ width:40px;height:40px;border-radius:13px
+}
+.formSection{
+ border-top:1px solid var(--line);margin-top:14px;padding-top:8px
+}
+.resultWinner{
+ padding:18px;background:var(--soft);border-radius:18px;text-align:center;margin-bottom:14px
+}
+.resultWinner strong{font-size:22px;display:block;margin:5px}
+@media(max-width:650px){
+ .container{padding:14px}
+ .grid2{grid-template-columns:1fr}
+ .stats{gap:6px}
+ .stat{padding:11px 5px}
+ .stat b{font-size:17px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
+<!-- LOGIN -->
+<section id="authPage" class="container login">
+ <div class="loginBox">
+  <div class="brandBig">
+   <div class="logo">ق</div>
+   <h1>قراري</h1>
+   <p class="muted">قرارك الوظيفي يبدأ من هنا</p>
+  </div>
 
-<div class="hero">
-<span class="badge">Qarari V4.1</span>
-<h1>قراري</h1>
-<p>قارن عروض العمل بالقيمة الحقيقية، المصاريف، المزايا ووقت العمل.</p>
-</div>
+  <div class="card">
+   <h2 id="authTitle">تسجيل الدخول</h2>
 
-<div class="toolbar">
-<button onclick="toggleTheme()">الوضع الليلي</button>
-<button onclick="resetAll()">مسح البيانات</button>
-</div>
+   <div id="nameWrap" class="hidden">
+    <label>الاسم</label>
+    <input id="authName" placeholder="اكتب اسمك">
+   </div>
 
-<div class="tabs">
-<button class="active" onclick="showTab('compare',this)">المقارنة</button>
-<button onclick="showTab('history',this)">السجل</button>
-</div>
+   <label>البريد الإلكتروني</label>
+   <input id="authEmail" type="email" placeholder="example@email.com">
 
-<section id="compare">
+   <label>كلمة المرور</label>
+   <input id="authPassword" type="password" placeholder="••••••••">
 
-<div class="grid">
+   <br><br>
+   <button class="primary" onclick="authAction()" id="authBtn">دخول</button>
+   <br><br>
+   <button class="secondary" onclick="toggleAuth()" id="authSwitch">إنشاء حساب جديد</button>
 
-<div class="card">
-<h2>العرض الأول</h2>
-<div id="formA"></div>
-</div>
-
-<div class="card">
-<h2>العرض الثاني</h2>
-<div id="formB"></div>
-</div>
-
-</div>
-
-<button class="primary" onclick="compare()">حلّل وقارن</button>
-
-<div id="results" class="hidden" style="margin-top:12px">
-
-<div class="card">
-<div id="winner" class="winner"></div>
-<p id="why" class="hint"></p>
-</div>
-
-<div class="grid">
-
-<div class="card">
-<h2 id="at"></h2>
-<div id="as" class="score"></div>
-<div id="am"></div>
-</div>
-
-<div class="card">
-<h2 id="bt"></h2>
-<div id="bs" class="score"></div>
-<div id="bm"></div>
-</div>
-
-</div>
-
-<div class="card">
-<h2>تحليل قراري</h2>
-<div id="ai" class="ai"></div>
-
-<p class="hint">
-التقييم إرشادي ويعتمد على البيانات المدخلة وليس استشارة قانونية أو مالية.
-</p>
-
-</div>
-</div>
+   <p class="small" style="margin-top:15px;text-align:center">
+    حساب V5 محفوظ محليًا على جهازك ولا يتم إرسال بياناتك لأي سيرفر.
+   </p>
+  </div>
+ </div>
 </section>
 
-<section id="history" class="hidden">
-<div class="card">
-<h2>آخر المقارنات</h2>
-<div id="historyList"></div>
-</div>
-</section>
+<!-- APP -->
+<div id="app" class="hidden">
 
+ <main id="homePage" class="page container">
+  <div class="topbar">
+   <div>
+    <div class="small">أهلًا بك 👋</div>
+    <h2 id="helloName" style="margin:2px 0">مستخدم قراري</h2>
+   </div>
+   <div class="avatar" id="avatar">ق</div>
+  </div>
+
+  <div class="hero">
+   <div class="small" style="color:#d0d5dd">QARARI 5.0</div>
+   <h1>مش كل راتب أعلى<br>هو العرض الأفضل.</h1>
+   <p>حلّل المال، الوقت، المزايا والمصاريف واعرف العرض الأنسب ليك.</p>
+   <button onclick="openPage('comparePage')">+ مقارنة جديدة</button>
+  </div>
+
+  <div class="stats">
+   <div class="stat"><b id="statOffers">0</b><span>عروض محفوظة</span></div>
+   <div class="stat"><b id="statCompare">0</b><span>مقارنات</span></div>
+   <div class="stat"><b id="statBest">--</b><span>أفضل Score</span></div>
+  </div>
+
+  <div class="sectionTitle"><h2>وصول سريع</h2></div>
+  <div class="quick">
+   <button class="quickCard" onclick="openPage('comparePage')">
+    <div class="quickIcon">⚖️</div><b>قارن عرضين</b><span class="small">قرار مالي ومهني</span>
+   </button>
+   <button class="quickCard" onclick="openPage('vaultPage')">
+    <div class="quickIcon">💼</div><b>عروضي</b><span class="small">Offer Vault</span>
+   </button>
+   <button class="quickCard" onclick="openPage('profilePage')">
+    <div class="quickIcon">👤</div><b>ملفي</b><span class="small">خصص قراري ليك</span>
+   </button>
+   <button class="quickCard" onclick="openPage('settingsPage')">
+    <div class="quickIcon">⚙️</div><b>الإعدادات</b><span class="small">تحكم في التطبيق</span>
+   </button>
+  </div>
+
+  <div class="sectionTitle"><h2>آخر قرار</h2></div>
+  <div class="card" id="lastDecision">
+   <p class="small">لسه مفيش مقارنة. أول قرار مستنيك.</p>
+  </div>
+ </main>
+
+ <!-- COMPARE -->
+ <main id="comparePage" class="page container hidden">
+  <div class="topbar">
+   <div><div class="small">Decision Mode</div><h1>قارن عرضين</h1></div>
+   <button class="back" onclick="openPage('homePage')">←</button>
+  </div>
+
+  <div class="grid2">
+   <div class="card">
+    <h2>العرض الأول</h2>
+    <div id="formA"></div>
+   </div>
+   <div class="card">
+    <h2>العرض الثاني</h2>
+    <div id="formB"></div>
+   </div>
+  </div>
+
+  <button class="primary" onclick="compareOffers()">حلّل العرضين</button>
+
+  <div id="compareResult" class="hidden" style="margin-top:14px">
+   <div class="card">
+    <div class="resultWinner">
+     <div class="small">اختيار قراري</div>
+     <strong id="winnerName"></strong>
+     <span id="winnerReason" class="small"></span>
+    </div>
+   </div>
+
+   <div class="grid2">
+    <div class="card">
+     <h2 id="resultAName"></h2>
+     <div class="scoreCircle" id="scoreA"></div>
+     <div id="metricsA" style="margin-top:15px"></div>
+    </div>
+    <div class="card">
+     <h2 id="resultBName"></h2>
+     <div class="scoreCircle" id="scoreB"></div>
+     <div id="metricsB" style="margin-top:15px"></div>
+    </div>
+   </div>
+
+   <div class="card">
+    <h2>🧠 تحليل قراري</h2>
+    <div id="decisionAnalysis"></div>
+   </div>
+
+   <div class="card">
+    <h2>🚨 Red Flags</h2>
+    <div id="redFlags"></div>
+   </div>
+
+   <div class="card">
+    <h2>🤝 مساعد التفاوض</h2>
+    <div id="negotiation"></div>
+   </div>
+  </div>
+ </main>
+
+ <!-- VAULT -->
+ <main id="vaultPage" class="page container hidden">
+  <div class="topbar">
+   <div><div class="small">Offer Vault</div><h1>عروضي</h1></div>
+   <button class="back" onclick="openPage('homePage')">←</button>
+  </div>
+  <div class="card">
+   <div id="vaultList"></div>
+  </div>
+ </main>
+
+ <!-- PROFILE -->
+ <main id="profilePage" class="page container hidden">
+  <div class="topbar">
+   <div><div class="small">Personalization</div><h1>ملفي الشخصي</h1></div>
+   <button class="back" onclick="openPage('homePage')">←</button>
+  </div>
+
+  <div class="card">
+   <label>الاسم</label><input id="profileName">
+   <label>المسمى الوظيفي</label><input id="profileJob" placeholder="Document Controller">
+   <label>الراتب الحالي</label><input id="profileSalary" type="number" value="0">
+   <label>أقل راتب تقبله</label><input id="profileMinimum" type="number" value="0">
+   <label>مدينتك</label>
+   <select id="profileCity">
+    <option value="riyadh">الرياض</option>
+    <option value="jeddah">جدة</option>
+    <option value="dammam">الدمام / الخبر</option>
+    <option value="other">مدينة أخرى</option>
+   </select>
+   <label>أهم شيء بالنسبة لك</label>
+   <select id="profilePriority">
+    <option value="money">الراتب والدخل</option>
+    <option value="balance">الراحة ووقت العمل</option>
+    <option value="benefits">المزايا</option>
+    <option value="balanced">توازن بين الكل</option>
+   </select>
+   <br><br>
+   <button class="primary" onclick="saveProfile()">حفظ الملف</button>
+  </div>
+ </main>
+
+ <!-- SETTINGS -->
+ <main id="settingsPage" class="page container hidden">
+  <div class="topbar">
+   <div><div class="small">Qarari</div><h1>الإعدادات</h1></div>
+   <button class="back" onclick="openPage('homePage')">←</button>
+  </div>
+
+  <div class="card">
+   <div class="setting">
+    <div><b>الوضع الليلي</b><div class="small">تغيير مظهر التطبيق</div></div>
+    <div id="themeSwitch" class="switch" onclick="toggleTheme()"></div>
+   </div>
+
+   <div class="setting">
+    <div><b>حفظ المقارنات</b><div class="small">يحفظ آخر قراراتك محليًا</div></div>
+    <div id="saveSwitch" class="switch on" onclick="toggleSave()"></div>
+   </div>
+
+   <div class="setting">
+    <div><b>الإصدار</b><div class="small">Qarari V5.0</div></div>
+    <span class="tag">5.0</span>
+   </div>
+  </div>
+
+  <div class="card">
+   <button class="secondary danger" onclick="clearHistory()">مسح سجل المقارنات</button>
+   <br><br>
+   <button class="secondary danger" onclick="logout()">تسجيل الخروج</button>
+  </div>
+
+  <p class="small">
+   بيانات هذه النسخة محفوظة محليًا على جهازك. تسجيل الدخول السحابي والمزامنة سيتم إضافتهما في إصدار لاحق.
+  </p>
+ </main>
+
+ <nav class="nav">
+  <button id="navHome" class="active" onclick="openPage('homePage')"><span>⌂</span>الرئيسية</button>
+  <button id="navCompare" onclick="openPage('comparePage')"><span>⚖</span>مقارنة</button>
+  <button id="navVault" onclick="openPage('vaultPage')"><span>▣</span>العروض</button>
+  <button id="navProfile" onclick="openPage('profilePage')"><span>♙</span>حسابي</button>
+  <button id="navSettings" onclick="openPage('settingsPage')"><span>⚙</span>الإعدادات</button>
+ </nav>
 </div>
 
 <script>
+const $=id=>document.getElementById(id);
+const money=v=>new Intl.NumberFormat('ar-SA',{
+ style:'currency',currency:'SAR',maximumFractionDigits:0
+}).format(Number(v||0));
 
-const cities={
-riyadh:1.15,
-jeddah:1.08,
-dammam:1.03,
-other:1
+let signupMode=false;
+
+const cityFactor={riyadh:1.15,jeddah:1.08,dammam:1.03,other:1};
+const benefitValues={
+ housing:900,transport:500,fuel:250,meals:350,medical:250,tickets:150
 };
 
-const jobTypes={
-office:1,
-field:.94,
-shift:.90,
-remote:1.06
-};
+function toggleAuth(){
+ signupMode=!signupMode;
+ $('nameWrap').classList.toggle('hidden',!signupMode);
+ $('authTitle').textContent=signupMode?'إنشاء حساب':'تسجيل الدخول';
+ $('authBtn').textContent=signupMode?'إنشاء الحساب':'دخول';
+ $('authSwitch').textContent=signupMode?'عندي حساب بالفعل':'إنشاء حساب جديد';
+}
+
+function authAction(){
+ const email=$('authEmail').value.trim().toLowerCase();
+ const pass=$('authPassword').value;
+ if(!email||!pass){alert('اكتب البريد الإلكتروني وكلمة المرور');return}
+
+ if(signupMode){
+  const name=$('authName').value.trim();
+  if(!name){alert('اكتب اسمك');return}
+  localStorage.setItem('qarari_user',JSON.stringify({name,email,password:pass}));
+  localStorage.setItem('qarari_logged','1');
+  localStorage.setItem('qarari_profile',JSON.stringify({name,city:'riyadh',priority:'balanced'}));
+  enterApp();
+ }else{
+  const u=JSON.parse(localStorage.getItem('qarari_user')||'null');
+  if(!u){alert('مفيش حساب على الجهاز. اعمل حساب جديد الأول.');return}
+  if(u.email!==email||u.password!==pass){alert('بيانات الدخول غير صحيحة');return}
+  localStorage.setItem('qarari_logged','1');
+  enterApp();
+ }
+}
+
+function enterApp(){
+ $('authPage').classList.add('hidden');
+ $('app').classList.remove('hidden');
+ loadProfile();
+ updateHome();
+ openPage('homePage');
+}
+
+function logout(){
+ localStorage.removeItem('qarari_logged');
+ location.reload();
+}
+
+function openPage(id){
+ document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));
+ $(id).classList.remove('hidden');
+
+ document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+ const map={
+  homePage:'navHome',comparePage:'navCompare',vaultPage:'navVault',
+  profilePage:'navProfile',settingsPage:'navSettings'
+ };
+ if(map[id])$(map[id]).classList.add('active');
+
+ if(id==='vaultPage')renderVault();
+ if(id==='homePage')updateHome();
+ window.scrollTo(0,0);
+}
 
 const fields=[
-['name','اسم الشركة / العرض','text',''],
-['city','المدينة','select',''],
-['jobType','نوع العمل','select',''],
-['basic','الراتب الأساسي','number',5000],
-['housingAllowance','بدل السكن','number',0],
-['transportAllowance','بدل النقل','number',0],
-['otherAllowance','بدلات أخرى','number',0],
-['overtime','أوفر تايم شهري','number',0],
-['annualBonus','بونص سنوي','number',0],
-['rent','السكن عليك شهريًا','number',0],
-['transportCost','المواصلات عليك','number',0],
-['food','المعيشة والأكل','number',1000],
-['otherCost','مصاريف أخرى','number',0],
-['hours','ساعات العمل يوميًا','number',8],
-['days','أيام العمل أسبوعيًا','number',5],
-['leave','الإجازة السنوية','number',21]
+ ['name','اسم الشركة / العرض','text'],
+ ['city','المدينة','city'],
+ ['basic','الراتب الأساسي','number'],
+ ['housingAllowance','بدل السكن','number'],
+ ['transportAllowance','بدل النقل','number'],
+ ['otherAllowance','بدلات أخرى','number'],
+ ['overtime','أوفر تايم شهري','number'],
+ ['annualBonus','بونص سنوي','number'],
+ ['rent','السكن عليك شهريًا','number'],
+ ['transportCost','المواصلات عليك','number'],
+ ['food','الأكل والمعيشة','number'],
+ ['otherCost','مصاريف أخرى','number'],
+ ['hours','ساعات العمل يوميًا','number'],
+ ['days','أيام العمل أسبوعيًا','number'],
+ ['leave','الإجازة السنوية','number']
 ];
 
-const benefits=[
-['housingProvided','سكن من الشركة',900],
-['carProvided','سيارة / مواصلات',500],
-['fuelProvided','بنزين',250],
-['mealsProvided','وجبات',350],
-['medical','تأمين طبي',250],
-['tickets','تذاكر سنوية',150]
-];
+function buildForm(p){
+ let h='';
+ fields.forEach((f,i)=>{
+  if(i===2)h+='<div class="formSection"><h3>الدخل</h3></div>';
+  if(i===8)h+='<div class="formSection"><h3>المصاريف</h3></div>';
+  if(i===12)h+='<div class="formSection"><h3>نظام العمل</h3></div>';
 
-function buildForm(p,label){
+  h+=`<label>${f[1]}</label>`;
 
-let h='';
+  if(f[2]==='city'){
+   h+=`<select id="${p}_${f[0]}">
+    <option value="riyadh">الرياض</option>
+    <option value="jeddah">جدة</option>
+    <option value="dammam">الدمام / الخبر</option>
+    <option value="other">مدينة أخرى</option>
+   </select>`;
+  }else{
+   let val=0;
+   if(f[0]==='hours')val=8;
+   if(f[0]==='days')val=5;
+   if(f[0]==='leave')val=21;
+   if(f[0]==='food')val=1000;
+   h+=`<input id="${p}_${f[0]}" type="${f[2]}" value="${f[2]==='number'?val:''}">`;
+  }
+ });
 
-fields.forEach((f,i)=>{
-
-if(i===3)h+='<h3>الدخل</h3>';
-if(i===9)h+='<h3>المصاريف</h3>';
-if(i===13)h+='<h3>نظام العمل</h3>';
-
-h+=`<label>${f[1]}</label>`;
-
-if(f[2]==='select'&&f[0]==='city'){
-
-h+=`
-<select id="${p}_${f[0]}">
-<option value="riyadh">الرياض</option>
-<option value="jeddah">جدة</option>
-<option value="dammam">الدمام / الخبر</option>
-<option value="other">مدينة أخرى</option>
-</select>`;
-
+ h+='<div class="formSection"><h3>مزايا الشركة</h3></div>';
+ [
+  ['housing','سكن من الشركة'],['transport','سيارة / مواصلات'],
+  ['fuel','بنزين'],['meals','وجبات'],['medical','تأمين طبي'],
+  ['tickets','تذاكر سنوية']
+ ].forEach(x=>{
+  h+=`<label class="check"><input type="checkbox" id="${p}_${x[0]}">${x[1]}</label>`;
+ });
+ return h;
 }
 
-else if(f[2]==='select'){
+$('formA').innerHTML=buildForm('a');
+$('formB').innerHTML=buildForm('b');
 
-h+=`
-<select id="${p}_${f[0]}">
-<option value="office">مكتبي</option>
-<option value="field">ميداني</option>
-<option value="shift">شفتات</option>
-<option value="remote">عن بعد</option>
-</select>`;
+function num(id){return Number($(id).value||0)}
 
-}
+function calculate(p){
+ let benefits=0,count=0;
+ Object.keys(benefitValues).forEach(k=>{
+  if($(p+'_'+k).checked){benefits+=benefitValues[k];count++}
+ });
 
-else{
+ const income=num(p+'_basic')+num(p+'_housingAllowance')+
+ num(p+'_transportAllowance')+num(p+'_otherAllowance')+
+ num(p+'_overtime')+num(p+'_annualBonus')/12;
 
-h+=`
-<input
-id="${p}_${f[0]}"
-type="${f[2]}"
-value="${f[0]==='name'?label:f[3]}">
-`;
+ const rawCosts=num(p+'_rent')+num(p+'_transportCost')+
+ num(p+'_food')+num(p+'_otherCost');
 
-}
+ const costs=rawCosts*cityFactor[$(p+'_city').value];
+ const net=income-costs;
+ const trueValue=net+benefits;
+ const hours=Math.max(1,num(p+'_hours')*num(p+'_days')*4.33);
+ const hourly=trueValue/hours;
 
-});
+ const finance=Math.max(0,Math.min(100,40+trueValue/110));
+ const time=Math.max(0,100-Math.max(0,num(p+'_hours')-8)*7-Math.max(0,num(p+'_days')-5)*12);
+ const leave=Math.min(100,num(p+'_leave')/30*100);
+ const benefitScore=Math.min(100,count*16);
 
-h+='<h3>مزايا الشركة</h3>';
+ const profile=JSON.parse(localStorage.getItem('qarari_profile')||'{}');
+ let weights={finance:.5,time:.23,leave:.12,benefits:.15};
+ if(profile.priority==='money')weights={finance:.65,time:.15,leave:.08,benefits:.12};
+ if(profile.priority==='balance')weights={finance:.35,time:.4,leave:.15,benefits:.10};
+ if(profile.priority==='benefits')weights={finance:.35,time:.15,leave:.10,benefits:.40};
 
-benefits.forEach(x=>{
+ const score=Math.round(finance*weights.finance+time*weights.time+leave*weights.leave+benefitScore*weights.benefits);
 
-h+=`
-<label class="check">
-<input type="checkbox" id="${p}_${x[0]}">
-${x[1]}
-</label>`;
-
-});
-
-return h;
-}
-
-formA.innerHTML=buildForm('a','العرض الأول');
-formB.innerHTML=buildForm('b','العرض الثاني');
-
-const n=id=>Number(document.getElementById(id).value||0);
-const s=id=>document.getElementById(id).value.trim();
-
-const money=v=>
-new Intl.NumberFormat(
-'ar-SA',
-{
-style:'currency',
-currency:'SAR',
-maximumFractionDigits:0
-}
-).format(v);
-
-function calc(p){
-
-const income=
-n(p+'_basic')+
-n(p+'_housingAllowance')+
-n(p+'_transportAllowance')+
-n(p+'_otherAllowance')+
-n(p+'_overtime')+
-n(p+'_annualBonus')/12;
-
-let benefitValue=0;
-let count=0;
-
-benefits.forEach(x=>{
-
-if(document.getElementById(p+'_'+x[0]).checked){
-
-benefitValue+=x[2];
-count++;
-
-}
-
-});
-
-const city=document.getElementById(p+'_city').value;
-const type=document.getElementById(p+'_jobType').value;
-
-const rawCosts=
-n(p+'_rent')+
-n(p+'_transportCost')+
-n(p+'_food')+
-n(p+'_otherCost');
-
-const adjustedCosts=rawCosts*cities[city];
-
-const net=income-adjustedCosts;
-
-const monthHours=Math.max(
-1,
-n(p+'_hours')*
-n(p+'_days')*
-4.33
-);
-
-const trueValue=net+benefitValue;
-
-const hourly=trueValue/monthHours;
-
-const financial=
-Math.max(
-0,
-Math.min(
-100,
-40+trueValue/110
-)
-);
-
-const timeScore=
-Math.max(
-0,
-100-
-(Math.max(0,n(p+'_hours')-8)*6)-
-(Math.max(0,n(p+'_days')-5)*10)
-)*jobTypes[type];
-
-const leaveScore=
-Math.min(
-100,
-n(p+'_leave')/30*100
-);
-
-const benefitsScore=
-Math.min(
-100,
-count*15
-);
-
-const score=Math.round(
-financial*.50+
-timeScore*.23+
-leaveScore*.12+
-benefitsScore*.15
-);
-
-return{
-name:s(p+'_name')||p,
-income,
-costs:adjustedCosts,
-net,
-benefitValue,
-trueValue,
-hourly,
-score,
-days:n(p+'_days'),
-hours:n(p+'_hours'),
-leave:n(p+'_leave'),
-count
-};
-
+ return{
+  name:$(p+'_name').value.trim()||'عرض بدون اسم',
+  city:$(p+'_city').value,basic:num(p+'_basic'),income,costs,net,
+  benefits,trueValue,hourly,score,hoursDay:num(p+'_hours'),
+  days:num(p+'_days'),leave:num(p+'_leave'),benefitCount:count
+ };
 }
 
 function metrics(x){
-
-return`
-
-<div class="metric">
-<span>الدخل الشهري</span>
-<b>${money(x.income)}</b>
-</div>
-
-<div class="metric">
-<span>المصاريف المعدلة</span>
-<b>${money(x.costs)}</b>
-</div>
-
-<div class="metric">
-<span>الصافي</span>
-<b>${money(x.net)}</b>
-</div>
-
-<div class="metric">
-<span>قيمة المزايا</span>
-<b>${money(x.benefitValue)}</b>
-</div>
-
-<div class="metric">
-<span>القيمة الحقيقية</span>
-<b>${money(x.trueValue)}</b>
-</div>
-
-<div class="metric">
-<span>قيمة ساعة العمل</span>
-<b>${money(x.hourly)}</b>
-</div>
-
-<div class="metric">
-<span>القيمة السنوية</span>
-<b>${money(x.trueValue*12)}</b>
-</div>
-
-`;
-
+ return `
+ <div class="metric"><span>الدخل</span><b>${money(x.income)}</b></div>
+ <div class="metric"><span>المصاريف</span><b>${money(x.costs)}</b></div>
+ <div class="metric"><span>الصافي</span><b>${money(x.net)}</b></div>
+ <div class="metric"><span>قيمة المزايا</span><b>${money(x.benefits)}</b></div>
+ <div class="metric"><span>القيمة الحقيقية</span><b>${money(x.trueValue)}</b></div>
+ <div class="metric"><span>قيمة ساعة العمل</span><b>${money(x.hourly)}</b></div>
+ <div class="metric"><span>سنويًا</span><b>${money(x.trueValue*12)}</b></div>`;
 }
 
-function analysis(a,b){
-
-const w=a.score>=b.score?a:b;
-const l=w===a?b:a;
-
-const arr=[];
-
-arr.push(
-`<b>${w.name}</b> يتقدم إجمالًا
-${w.score}/100
-مقابل
-${l.score}/100.`
-);
-
-if(w.trueValue>l.trueValue){
-
-arr.push(
-`القيمة الحقيقية أعلى بحوالي
-<b>${money(w.trueValue-l.trueValue)}</b>
-شهريًا.`
-);
-
+function flags(x){
+ let f=[];
+ const profile=JSON.parse(localStorage.getItem('qarari_profile')||'{}');
+ if(x.hoursDay>9)f.push(`${x.name}: ساعات العمل مرتفعة (${x.hoursDay} ساعات).`);
+ if(x.days>=6)f.push(`${x.name}: العمل ${x.days} أيام أسبوعيًا يقلل الـWork-Life Balance.`);
+ if(x.leave<21)f.push(`${x.name}: الإجازة السنوية المدخلة منخفضة.`);
+ if(x.net<0)f.push(`${x.name}: مصاريفك المقدرة أعلى من الدخل.`);
+ if(profile.minimum&&x.income<Number(profile.minimum))f.push(`${x.name}: الدخل أقل من الحد الأدنى اللي حددته في بروفايلك.`);
+ if(x.benefitCount===0)f.push(`${x.name}: مفيش مزايا إضافية مسجلة.`);
+ return f;
 }
 
-const h=a.hourly>b.hourly?a:b;
+function compareOffers(){
+ const a=calculate('a'),b=calculate('b');
+ const winner=a.score>=b.score?a:b;
+ const loser=winner===a?b:a;
 
-arr.push(
-`<b>${h.name}</b>
-أفضل في قيمة ساعة العمل.`
-);
+ $('compareResult').classList.remove('hidden');
+ $('winnerName').textContent=winner.name;
+ $('winnerReason').textContent=`يتقدم ${winner.score}/100 مقابل ${loser.score}/100`;
 
-if(a.days!==b.days){
+ $('resultAName').textContent=a.name;
+ $('resultBName').textContent=b.name;
+ $('scoreA').textContent=a.score;
+ $('scoreB').textContent=b.score;
+ $('metricsA').innerHTML=metrics(a);
+ $('metricsB').innerHTML=metrics(b);
 
-const d=a.days<b.days?a:b;
+ let analysis=[];
+ const moneyWinner=a.trueValue>=b.trueValue?a:b;
+ const hourWinner=a.hourly>=b.hourly?a:b;
+ const balanceWinner=(a.hoursDay*a.days)<=(b.hoursDay*b.days)?a:b;
 
-arr.push(
-`<b>${d.name}</b>
-يوفر وقتًا أسبوعيًا أفضل.`
-);
+ analysis.push(`<div class="alert"><b>💰 أفضل ماليًا:</b> ${moneyWinner.name}</div>`);
+ analysis.push(`<div class="alert"><b>⏱ أفضل قيمة للساعة:</b> ${hourWinner.name}</div>`);
+ analysis.push(`<div class="alert"><b>🌿 أفضل في وقت العمل:</b> ${balanceWinner.name}</div>`);
+ analysis.push(`<div class="alert"><b>🏆 قرار قراري:</b> ${winner.name} هو الأنسب بناءً على أولوياتك الحالية.</div>`);
+ $('decisionAnalysis').innerHTML=analysis.join('');
 
+ const allFlags=[...flags(a),...flags(b)];
+ $('redFlags').innerHTML=allFlags.length?
+  allFlags.map(x=>`<div class="alert red">⚠ ${x}</div>`).join(''):
+  '<div class="alert green">✓ لم تظهر تحذيرات قوية من البيانات المدخلة.</div>';
+
+ const diff=Math.max(0,winner.trueValue-loser.trueValue);
+ let ask=Math.ceil(diff/50)*50;
+ if(ask<300)ask=300;
+
+ $('negotiation').innerHTML=`
+ <div class="alert">
+ لو أنت مفضل <b>${loser.name}</b> لأسباب شخصية أو مهنية،
+ حاول تفاوض على زيادة تقارب <b>${money(ask)}</b> شهريًا
+ أو مزايا تعادلها.
+ </div>
+ <div class="alert">
+ قبل التوقيع اسأل HR عن: الأوفر تايم، فترة التجربة، التأمين،
+ التذاكر، ساعات العمل الفعلية وأي بدلات غير مكتوبة.
+ </div>`;
+
+ const record={id:Date.now(),date:new Date().toLocaleString('ar-SA'),a,b,winner:winner.name};
+ let history=JSON.parse(localStorage.getItem('qarari_history')||'[]');
+ if(localStorage.getItem('qarari_save')!=='0'){
+  history.unshift(record);
+  localStorage.setItem('qarari_history',JSON.stringify(history.slice(0,30)));
+  saveOffer(a);saveOffer(b);
+ }
+ updateHome();
+ window.scrollTo({top:$('compareResult').offsetTop-10,behavior:'smooth'});
 }
 
-if(a.leave!==b.leave){
-
-const v=a.leave>b.leave?a:b;
-
-arr.push(
-`<b>${v.name}</b>
-لديه إجازة سنوية أطول.`
-);
-
+function saveOffer(x){
+ let offers=JSON.parse(localStorage.getItem('qarari_offers')||'[]');
+ const existing=offers.findIndex(o=>o.name===x.name);
+ const obj={...x,savedAt:new Date().toLocaleString('ar-SA')};
+ if(existing>=0)offers[existing]=obj;else offers.unshift(obj);
+ localStorage.setItem('qarari_offers',JSON.stringify(offers.slice(0,50)));
 }
 
-arr.push(
-'راجع فترة التجربة، ساعات العمل الفعلية، شروط إنهاء العقد، والتفاصيل المكتوبة للمزايا قبل قبول العرض.'
-);
-
-return arr.join('<br><br>');
-
+function renderVault(){
+ const offers=JSON.parse(localStorage.getItem('qarari_offers')||'[]');
+ if(!offers.length){
+  $('vaultList').innerHTML='<p class="small">مفيش عروض محفوظة لسه. اعمل مقارنة وهتظهر هنا تلقائيًا.</p>';
+  return;
+ }
+ $('vaultList').innerHTML=offers.map((o,i)=>`
+  <div class="offer">
+   <div>
+    <b>${o.name}</b>
+    <span class="small">${money(o.trueValue)} قيمة حقيقية شهريًا</span><br>
+    <span class="tag">${o.score}/100</span>
+   </div>
+   <button class="linkbtn danger" onclick="deleteOffer(${i})">حذف</button>
+  </div>`).join('');
 }
 
-function compare(){
-
-const a=calc('a');
-const b=calc('b');
-
-const w=a.score>=b.score?a:b;
-
-results.classList.remove('hidden');
-
-winner.innerHTML=
-'🏆 '+w.name+
-' هو الاختيار الأقوى حاليًا';
-
-why.textContent=
-'التقييم يجمع بين المال، تكلفة المدينة، وقت العمل، الإجازة والمزايا.';
-
-at.textContent=a.name;
-bt.textContent=b.name;
-
-as.textContent=a.score+'/100';
-bs.textContent=b.score+'/100';
-
-am.innerHTML=metrics(a);
-bm.innerHTML=metrics(b);
-
-ai.innerHTML=analysis(a,b);
-
-const h=
-JSON.parse(
-localStorage.getItem('qarari_history')||'[]'
-);
-
-h.unshift({
-date:new Date().toLocaleString('ar-SA'),
-a,
-b
-});
-
-localStorage.setItem(
-'qarari_history',
-JSON.stringify(h.slice(0,20))
-);
-
-renderHistory();
-
+function deleteOffer(i){
+ let o=JSON.parse(localStorage.getItem('qarari_offers')||'[]');
+ o.splice(i,1);
+ localStorage.setItem('qarari_offers',JSON.stringify(o));
+ renderVault();updateHome();
 }
 
-function showTab(id,btn){
+function updateHome(){
+ const u=JSON.parse(localStorage.getItem('qarari_user')||'{}');
+ const profile=JSON.parse(localStorage.getItem('qarari_profile')||'{}');
+ const name=profile.name||u.name||'مستخدم قراري';
+ $('helloName').textContent=name;
+ $('avatar').textContent=name.charAt(0)||'ق';
 
-['compare','history'].forEach(
-x=>document.getElementById(x).classList.add('hidden')
-);
+ const offers=JSON.parse(localStorage.getItem('qarari_offers')||'[]');
+ const history=JSON.parse(localStorage.getItem('qarari_history')||'[]');
 
-document.getElementById(id).classList.remove('hidden');
+ $('statOffers').textContent=offers.length;
+ $('statCompare').textContent=history.length;
+ $('statBest').textContent=offers.length?Math.max(...offers.map(x=>x.score))+'/100':'--';
 
-document.querySelectorAll('.tabs button')
-.forEach(x=>x.classList.remove('active'));
-
-btn.classList.add('active');
-
-if(id==='history')renderHistory();
-
+ if(history.length){
+  const x=history[0];
+  $('lastDecision').innerHTML=`
+   <b>${x.winner}</b>
+   <p class="small">كان اختيار قراري في آخر مقارنة بتاريخ ${x.date}</p>
+   <span class="tag">${x.a.name} ${x.a.score}/100</span>
+   <span class="tag">${x.b.name} ${x.b.score}/100</span>`;
+ }
 }
 
-function renderHistory(){
+function saveProfile(){
+ const p={
+  name:$('profileName').value.trim(),
+  job:$('profileJob').value.trim(),
+  salary:num('profileSalary'),
+  minimum:num('profileMinimum'),
+  city:$('profileCity').value,
+  priority:$('profilePriority').value
+ };
+ localStorage.setItem('qarari_profile',JSON.stringify(p));
+ updateHome();
+ alert('تم حفظ ملفك الشخصي');
+}
 
-const h=
-JSON.parse(
-localStorage.getItem('qarari_history')||'[]'
-);
-
-historyList.innerHTML=
-h.length
-?
-h.map(x=>`
-
-<div style="
-padding:10px 0;
-border-bottom:1px solid var(--line)
-">
-
-<b>${x.a.name}</b>
-${x.a.score}/100
-
-—
-
-<b>${x.b.name}</b>
-${x.b.score}/100
-
-<br>
-
-<span class="hint">
-${x.date}
-</span>
-
-</div>
-
-`).join('')
-
-:
-
-'<p class="hint">لا توجد مقارنات محفوظة.</p>';
-
+function loadProfile(){
+ const u=JSON.parse(localStorage.getItem('qarari_user')||'{}');
+ const p=JSON.parse(localStorage.getItem('qarari_profile')||'{}');
+ $('profileName').value=p.name||u.name||'';
+ $('profileJob').value=p.job||'';
+ $('profileSalary').value=p.salary||0;
+ $('profileMinimum').value=p.minimum||0;
+ $('profileCity').value=p.city||'riyadh';
+ $('profilePriority').value=p.priority||'balanced';
 }
 
 function toggleTheme(){
-
-const cur=
-document.documentElement
-.getAttribute('data-theme');
-
-const next=
-cur==='dark'?'light':'dark';
-
-document.documentElement
-.setAttribute('data-theme',next);
-
-localStorage.setItem(
-'theme',
-next
-);
-
+ const dark=document.documentElement.getAttribute('data-theme')==='dark';
+ const next=dark?'light':'dark';
+ document.documentElement.setAttribute('data-theme',next);
+ localStorage.setItem('qarari_theme',next);
+ $('themeSwitch').classList.toggle('on',next==='dark');
 }
 
-function resetAll(){
-
-if(
-confirm(
-'مسح سجل قراري والبيانات المحلية؟'
-)
-){
-
-localStorage.clear();
-location.reload();
-
+function toggleSave(){
+ const enabled=localStorage.getItem('qarari_save')!=='0';
+ localStorage.setItem('qarari_save',enabled?'0':'1');
+ $('saveSwitch').classList.toggle('on',!enabled);
 }
 
+function clearHistory(){
+ if(confirm('متأكد إنك عايز تمسح سجل المقارنات؟')){
+  localStorage.removeItem('qarari_history');
+  updateHome();
+  alert('تم مسح السجل');
+ }
 }
 
-document.documentElement
-.setAttribute(
-'data-theme',
-localStorage.getItem('theme')||'light'
-);
+const savedTheme=localStorage.getItem('qarari_theme')||'light';
+document.documentElement.setAttribute('data-theme',savedTheme);
+$('themeSwitch').classList.toggle('on',savedTheme==='dark');
+$('saveSwitch').classList.toggle('on',localStorage.getItem('qarari_save')!=='0');
 
-renderHistory();
-
+if(localStorage.getItem('qarari_logged')==='1'){
+ enterApp();
+}
 </script>
 
 </body>
